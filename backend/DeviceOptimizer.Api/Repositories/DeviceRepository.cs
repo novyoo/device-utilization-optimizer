@@ -4,7 +4,7 @@ using DeviceOptimizer.Api.Models;
 
 namespace DeviceOptimizer.Api.Repositories
 {
-    public class DeviceRepository : IDeviceRepository
+    public class DeviceRepository : IDeviceRepositorygit
     {
         private readonly AppDbContext _context;
 
