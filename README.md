@@ -1,0 +1,38 @@
+## Folder structure
+device-utilization-optimizer/
+    backend/
+        DeviceOptimizer.Api/
+            DeviceOptimizer.Api.csproj
+            Program.cs
+            appsettings.json
+            Models/
+                 Device.cs
+            Data/
+                 AppDbContext.cs
+            Services/
+                IDeviceService.cs
+                DeviceService.cs
+            Repositories/
+                IDeviceRepository.cs
+                DeviceRepository.cs
+            Controllers/
+                DevicesController.cs
+            DTOs/
+                DeviceDto.cs
+                CreateDeviceDto.cs
+                TenantUtilizationDto.cs
+            Data/
+                SeedData.cs
+    frontend/
+        device-optimizer-ui/   (created via Vite — instructions below)
+            src/
+                api/
+                    deviceApi.js
+                components/
+                    Dashboard.jsx
+                    DeviceTable.jsx
+                    TenantUtilization.jsx
+                    DeviceForm.jsx
+                App.jsx
+                main.jsx
+    README.md
