@@ -2,20 +2,21 @@ using Microsoft.EntityFrameworkCore;
 using DeviceOptimizer.Api.Data;
 using DeviceOptimizer.Api.Repositories;
 using DeviceOptimizer.Api.Services;
+using DeviceOptimizer.Api.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IDeviceRepositorygit, DeviceRepository>();
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
+
+builder.Services.AddHostedService<DeviceActivitySimulator>();
 
 const string FrontendCorsPolicy = "FrontendCorsPolicy";
 builder.Services.AddCors(options =>
@@ -37,7 +38,7 @@ using (var scope = app.Services.CreateScope())
     SeedData.Initialize(db);
 }
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

@@ -4,7 +4,7 @@ using DeviceOptimizer.Api.Models;
 
 namespace DeviceOptimizer.Api.Repositories
 {
-    public class DeviceRepository : IDeviceRepositorygit
+    public class DeviceRepository : IDeviceRepository
     {
         private readonly AppDbContext _context;
 
@@ -21,6 +21,11 @@ namespace DeviceOptimizer.Api.Repositories
         public async Task<Device?> GetByIdAsync(int id)
         {
             return await _context.Devices.FindAsync(id);
+        }
+
+        public async Task<Device?> GetByApiKeyAsync(Guid apiKey)
+        {
+            return await _context.Devices.FirstOrDefaultAsync(d => d.ApiKey == apiKey);
         }
 
         public async Task<List<Device>> GetByTenantAsync(string tenantId)
