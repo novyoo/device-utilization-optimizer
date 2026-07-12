@@ -33,11 +33,12 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
 
+  // Dialog state: undefined = closed, {} = create mode, device object = edit mode
   const [formDevice, setFormDevice] = useState(undefined);
   const [submitting, setSubmitting] = useState(false);
   const [actionError, setActionError] = useState(null);
 
-  // Delete confirm dialog state, separate from formDevice since it's a
+  // Delete confirm dialog state — separate from formDevice since it's a
   // different dialog with different content (no form, just a warning).
   const [deviceToDelete, setDeviceToDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
@@ -65,7 +66,7 @@ export default function Dashboard() {
 
   function openCreateForm() {
     setActionError(null);
-    setFormDevice({}); 
+    setFormDevice({}); // truthy + no id => create mode
   }
 
   function openEditForm(device) {
@@ -94,6 +95,8 @@ export default function Dashboard() {
     }
   }
 
+  // Delete is now a two-step flow: click Delete opens the confirm dialog,
+  // confirming there actually calls the API.
   function handleDelete(device) {
     setActionError(null);
     setDeviceToDelete(device);

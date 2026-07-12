@@ -80,7 +80,7 @@ const appTheme = {
   colorPaletteYellowForeground2: '#FFAE19',
   colorPaletteYellowForeground3: '#14120E',
 
-  // Shadows 
+  // Shadows — darker/tighter so cards feel like they sit on black, not grey
   shadow4: '0 1px 3px rgba(0,0,0,0.5)',
   shadow8: '0 2px 8px rgba(0,0,0,0.5)',
   shadow16: '0 4px 16px rgba(0,0,0,0.55)',

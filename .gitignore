@@ -1,7 +1,4 @@
-# .NET build output
-backend/**/bin/
-backend/**/obj/
-
-# Frontend
-frontend/**/node_modules/
-frontend/**/dist/
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
