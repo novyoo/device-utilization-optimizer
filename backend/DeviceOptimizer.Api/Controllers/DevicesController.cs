@@ -117,7 +117,16 @@ namespace DeviceOptimizer.Api.Controllers
             return Ok(MapToDto(updated!));
         }
 
-        // GET /api/devices/tenant-utilization
+        [HttpPost("heartbeat")]
+        public async Task<IActionResult> Heartbeat(HeartbeatDto dto)
+        {
+            var success = await _deviceService.HeartbeatAsync(dto.ApiKey);
+            if (!success)
+                return NotFound("Unknown device API key, or device is Returned.");
+
+            return NoContent();
+        }
+
         [HttpGet("tenant-utilization")]
         public async Task<ActionResult<IEnumerable<TenantUtilizationDto>>> GetTenantUtilization()
         {
@@ -145,6 +154,7 @@ namespace DeviceOptimizer.Api.Controllers
                 DeviceName = device.DeviceName,
                 AssignedUser = device.AssignedUser,
                 LastActiveDate = device.LastActiveDate,
+                ApiKey = device.ApiKey,
                 Status = device.Status.ToString(),
                 DaysSinceLastActive = (int)(DateTime.UtcNow - device.LastActiveDate).TotalDays
             };

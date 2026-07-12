@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DeviceOptimizer.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e313fafffcccce0145d6f378e42c410938ed282c")]
 [assembly: System.Reflection.AssemblyProductAttribute("DeviceOptimizer.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DeviceOptimizer.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

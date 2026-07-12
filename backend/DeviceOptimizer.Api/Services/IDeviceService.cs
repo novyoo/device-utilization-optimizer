@@ -10,13 +10,14 @@ namespace DeviceOptimizer.Api.Services
         Task<bool> UpdateDeviceAsync(Device device);
         Task<bool> DeleteDeviceAsync(int id);
 
-        Task<bool> CheckInDeviceAsync(int id);      // "this device is being used again"
-        Task<bool> MarkAsReturnedAsync(int id);      // "this device has been returned/retired"
+        Task<bool> CheckInDeviceAsync(int id);      
+        Task<bool> MarkAsReturnedAsync(int id);     
+        Task<bool> HeartbeatAsync(Guid apiKey);      
 
         Task<Dictionary<string, TenantUtilizationSummary>> GetTenantUtilizationAsync();
     }
 
-    // Small internal DTO-like class used
+
     public class TenantUtilizationSummary
     {
         public int TotalDevices { get; set; }

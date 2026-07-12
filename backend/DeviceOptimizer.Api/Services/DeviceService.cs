@@ -12,8 +12,6 @@ namespace DeviceOptimizer.Api.Services
         {
             _repository = repository;
 
-            // Read once per request from appsettings.json
-            // Falls back to 7 if the key is missing/misconfigured, so the app never crashes
             _idleThresholdDays = config.GetValue<int?>("IdleSettings:IdleThresholdDays") ?? 7;
         }
 
@@ -86,6 +84,19 @@ namespace DeviceOptimizer.Api.Services
             return true;
         }
 
+        public async Task<bool> HeartbeatAsync(Guid apiKey)
+        {
+            var device = await _repository.GetByApiKeyAsync(apiKey);
+            if (device == null) return false;
+
+            if (device.Status == DeviceStatus.Returned) return false;
+
+            device.LastActiveDate = DateTime.UtcNow;
+            device.Status = DeviceStatus.Active;
+            await _repository.UpdateAsync(device);
+            return true;
+        }
+
         public async Task<Dictionary<string, TenantUtilizationSummary>> GetTenantUtilizationAsync()
         {
             var devices = await _repository.GetAllAsync();
@@ -111,10 +122,7 @@ namespace DeviceOptimizer.Api.Services
                             UtilizationRate = total == 0 ? 0 : Math.Round((double)active / total, 2)
                         };
                     });
-        }
-
-        // Idle-detection logic lives here, not in the repository or DB.
-        // A device is idle if it's currently Active/Idle AND its LastActiveDatenis older than the configured threshold. 
+        } 
         private void RecalculateStatus(Device device)
         {
             if (device.Status == DeviceStatus.Returned) return;
